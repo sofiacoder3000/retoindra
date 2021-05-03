@@ -105,3 +105,7 @@ Recommended folder and file structure :
         ├── footer
         └── guards
 </pre>
+
+## Documentation SWAGGER
+
+[SWAGGER](http://localhost:3001/api/)

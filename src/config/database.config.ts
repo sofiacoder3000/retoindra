@@ -5,7 +5,7 @@ export const databaseConfig = {
   username: process.env.TYPEORM_USERNAME || 'root',
   password: process.env.TYPEORM_PASSWORD || '',
 
-  database: process.env.TYPEORM_DATABASE || 'nest_test_indra',
+  database: process.env.TYPEORM_DATABASE || 'test_nest_indra',
   autoLoadEntities: true,
   synchronize: true,
 };

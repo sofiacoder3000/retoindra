@@ -9,10 +9,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: true,
   });
+  /*
   app.enableCors({
     origin: true,
     credentials: true,
-  });
+  });*/
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix('api');
