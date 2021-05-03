@@ -29,33 +29,39 @@
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
+```
+
+## Prepare environment local
+
+```bash
+$ docker-compose up
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn test
 
 # e2e tests
-$ npm run test:e2e
+$ yarn test:e2e
 
 # test coverage
-$ npm run test:cov
+$ yarn test:cov
 ```
 
 ## Support
@@ -109,3 +115,25 @@ Recommended folder and file structure :
 ## Documentation SWAGGER
 
 [SWAGGER](http://localhost:3001/api/)
+
+## Serveless
+
+```bash
+# OFFLINE
+$ sls offline start
+
+# deploy AWS
+$ sls deploy
+
+```
+
+## Notas:
+
+- Lamentablemente he estado ocupadísima el fin de semana, revisé el correo y me di cuenta que la fecha límite era el domingo a la media noche, ya era muy tarde, y estaba concentrada en otra tarea X.
+
+Para esta entrega consideré\_
+
+- Principios Solid.
+- Agregué el Swagger para la documentación [SWAGGER](http://localhost:3001/api/).
+- Configuración de interceptores y decoradores.
+- Configure una base de datos mysql para el local con un docker-compose.

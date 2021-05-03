@@ -28,6 +28,7 @@ AppModule = __decorate([
                 useFactory: (configService) => ({
                     type: 'mysql',
                     host: configService.environment.database.host,
+                    port: configService.environment.database.port,
                     username: configService.environment.database.username,
                     password: configService.environment.database.password,
                     database: configService.environment.database.database,

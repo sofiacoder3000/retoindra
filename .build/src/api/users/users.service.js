@@ -67,6 +67,7 @@ let UsersService = class UsersService {
             .getOne();
     }
     async findOne(user) {
+        console.log(user);
         return await this.userRepository.findOne(user);
     }
     async findMe(userId) {

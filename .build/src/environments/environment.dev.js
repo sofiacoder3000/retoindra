@@ -6,9 +6,9 @@ exports.environment = {
     database: {
         host: process.env.MYSQL_HOST || 'localhost',
         port: process.env.MYSQL_PORT || 3306,
-        username: process.env.MYSQL_USERNAME || 'root',
-        password: process.env.MYSQL_PASSWORD || '',
-        database: process.env.MYSQL_DATABASE || 'test-nest-indra',
+        username: process.env.MYSQL_USERNAME || 'sofia',
+        password: process.env.MYSQL_PASSWORD || 'sofia123',
+        database: process.env.MYSQL_DATABASE || 'test_nest_indra',
         autoLoadEntities: true,
         synchronize: true,
     },
