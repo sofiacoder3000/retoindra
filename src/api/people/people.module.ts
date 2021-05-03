@@ -1,5 +1,6 @@
 import { Module, HttpModule } from '@nestjs/common';
 import { PeopleController } from './people.controller';
+import { PeopleService } from './people.service';
 
 @Module({
   imports: [
@@ -8,5 +9,6 @@ import { PeopleController } from './people.controller';
     }),
   ],
   controllers: [PeopleController],
+  providers: [PeopleService],
 })
 export class PeopleModule {}
