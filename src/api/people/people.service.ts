@@ -8,7 +8,7 @@ export class PeopleService {
 
   async findAll(): Promise<PersonDto[]> {
     const response = await this.httpService.get('/').toPromise();
-    return response.data.map((item) =>
+    return response.data.results.map((item) =>
       plainToClass(PersonDto, item, {
         excludeExtraneousValues: true,
       }),
@@ -17,7 +17,7 @@ export class PeopleService {
 
   async findById(id: number): Promise<PersonDto> {
     const response = await this.httpService.get(`/${id}/`).toPromise();
-    return plainToClass(PersonDto, response.data, {
+    return await plainToClass(PersonDto, response.data, {
       excludeExtraneousValues: true,
     });
   }
