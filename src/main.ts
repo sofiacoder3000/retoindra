@@ -22,6 +22,10 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('People')
     .addTag('Users')
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'access-token',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

@@ -1,9 +1,12 @@
-import { Module } from '@nestjs/common';
-import { PeopleService } from './people.service';
+import { Module, HttpModule } from '@nestjs/common';
 import { PeopleController } from './people.controller';
 
 @Module({
+  imports: [
+    HttpModule.register({
+      baseURL: 'https://swapi.py4e.com/api/people',
+    }),
+  ],
   controllers: [PeopleController],
-  providers: [PeopleService]
 })
 export class PeopleModule {}

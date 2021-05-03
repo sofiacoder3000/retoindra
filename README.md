@@ -34,6 +34,8 @@ $ yarn install
 
 ## Prepare environment local
 
+Please make sure the docker client is initialized on your PC and:
+
 ```bash
 $ docker-compose up
 ```
@@ -77,6 +79,8 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Notes by JAKELINE SOFIA CAMPOS CABELLO
 
 NestJs is fully inspired from Angular. <br/>
 If you want more guidelines (for the naming...) here is the [original documentation](https://angular.io/guide/styleguide).
@@ -131,9 +135,11 @@ $ sls deploy
 
 - Lamentablemente he estado ocupadísima el fin de semana, revisé el correo y me di cuenta que la fecha límite era el domingo a la media noche, ya era muy tarde, y estaba concentrada en otra tarea X.
 
-Para esta entrega consideré\_
+Para esta entrega consideré:
 
 - Principios Solid.
 - Agregué el Swagger para la documentación [SWAGGER](http://localhost:3001/api/).
 - Configuración de interceptores y decoradores.
-- Configure una base de datos mysql para el local con un docker-compose.
+- Configuré una base de datos mysql para el local con un docker-compose.
+
+(\*\*) _Considero que hay cosas por completar como mayor detalle en la documentación_

@@ -19,7 +19,8 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { SigninUserDto } from './dto/signin-user.dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
-
+import { ApiTags, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -28,6 +29,7 @@ export class AuthController {
   ) {}
 
   @Post('signin')
+  @ApiResponse({ type: String, status: 200 })
   async signIn(@Body() body: SigninUserDto): Promise<{ token: string }> {
     const user = await this.authService.signIn(body.email, body.password);
 
@@ -65,6 +67,7 @@ export class AuthController {
 
   @Get('refresh-token')
   @Roles('user', 'premium', 'admin')
+  @ApiBearerAuth()
   async refreshToken(
     @AuthUser() user: JwtPayload,
   ): Promise<{ me: User; token: string }> {

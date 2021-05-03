@@ -15,6 +15,6 @@ export class UserEntity implements User {
   @Column({ default: true, select: false })
   password: string;
 
-  @Column()
+  @Column({ default: 'user' })
   role: 'user' | 'premium' | 'admin';
 }

@@ -22,15 +22,9 @@ provider:
     MYSQL_PASSWORD: ${self:custom.mysqlPassword.${self:provider.stage}}
     MYSQL_DATABASE: ${self:custom.mysqlDatabase.${self:provider.stage}}
     MYSQL_PORT: ${self:custom.mysqlPort.${self:provider.stage}}
-  iamRoleStatements:
-    - ${file(iam/UsersTableIAM.yml):UsersTableIAM}
 
 package:
   individually: true
-
-resources:
-  Resources:
-    usersTable: ${file(resources/usersTable.yml):usersTable}
 
 functions:
   main: # The name of the lambda function
@@ -46,15 +40,19 @@ custom:
   stages:
     - local
     - dev
+    - stage
   mysqlHost:
     local: localhost
     dev: localhost
+    stage:
   mysqlUser:
     local: root
     dev: root
+    stage: admin
   mysqlPassword:
     local: '1'
     dev: '1'
+    stage: ''
   mysqlDatabase:
     local: test-nest-indra
     dev: test-nest-indra
