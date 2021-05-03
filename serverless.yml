@@ -1,0 +1,64 @@
+service: nest-sls-indra
+useDotenv: true
+frameworkVersion: '^2.34.0'
+plugins:
+  - 'serverless-plugin-typescript'
+  - serverless-plugin-optimize
+  - serverless-offline
+  - serverless-dynamodb-local
+
+provider:
+  name: aws
+  tracing:
+    apiGateway: true
+  runtime: nodejs12.x
+  memorySize: 256
+  logRetentionInDays: ${self:custom.vars.logRetentionInDays, 1}
+  lambdaHashingVersion: '20201221'
+  stage: ${opt:stage, 'dev'}
+  region: us-east-1
+  environment:
+    MYSQL_HOST: ${self:custom.mysqlHost.${self:provider.stage}}
+    MYSQL_USERNAME: ${self:custom.mysqlUser.${self:provider.stage}}
+    MYSQL_PASSWORD: ${self:custom.mysqlPassword.${self:provider.stage}}
+    MYSQL_DATABASE: ${self:custom.mysqlDatabase.${self:provider.stage}}
+    MYSQL_PORT: ${self:custom.mysqlPort.${self:provider.stage}}
+  iamRoleStatements:
+    - ${file(iam/UsersTableIAM.yml):UsersTableIAM}
+
+package:
+  individually: true
+
+resources:
+  Resources:
+    usersTable: ${file(resources/usersTable.yml):usersTable}
+
+functions:
+  main: # The name of the lambda function
+    # The module 'handler' is exported in the file 'src/lambda'
+    handler: src/lambda.handler
+    events:
+      - http:
+          method: any
+          path: /{any+}
+custom:
+  optimize:
+    external: ['swagger-ui-dist']
+  stages:
+    - local
+    - dev
+  mysqlHost:
+    local: localhost
+    dev: localhost
+  mysqlUser:
+    local: root
+    dev: root
+  mysqlPassword:
+    local: '1'
+    dev: '1'
+  mysqlDatabase:
+    local: test-nest-indra
+    dev: test-nest-indra
+  mysqlPort:
+    local: '3306'
+    dev: '3306'
