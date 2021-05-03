@@ -20,11 +20,12 @@ async function bootstrap() {
     .setTitle('Challenge INDRA')
     .setDescription('By Jakeline Sofia Campos Cabello')
     .setVersion('1.0')
-    .addTag('people')
+    .addTag('People')
+    .addTag('Users')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
-  Logger.log('Listened on PORT 3000');
-  await app.listen(3000);
+  Logger.log('Listened on PORT 3001');
+  await app.listen(process.env.PORT || 3001);
 }
 bootstrap();

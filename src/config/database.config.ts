@@ -3,7 +3,7 @@ export const databaseConfig = {
   host: process.env.TYPEORM_HOST || 'localhost',
   port: parseInt(process.env.TYPEORM_PORT) || 3306,
   username: process.env.TYPEORM_USERNAME || 'root',
-  password: process.env.TYPEORM_PASSWORD || '1',
+  password: process.env.TYPEORM_PASSWORD || '',
 
   database: process.env.TYPEORM_DATABASE || 'nest_test_indra',
   autoLoadEntities: true,

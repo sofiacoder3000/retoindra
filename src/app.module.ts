@@ -19,7 +19,7 @@ import { ConfigService } from './shared/config/config.service';
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
         host: configService.environment.database.host,
-        //port: configService.environment.database.port,
+        port: configService.environment.database.port,
         username: configService.environment.database.username,
         password: configService.environment.database.password,
         database: configService.environment.database.database,

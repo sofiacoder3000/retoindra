@@ -8,7 +8,7 @@ import {
   Delete,
   NotFoundException,
 } from '@nestjs/common';
-
+import { ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -18,6 +18,7 @@ import { JwtPayload } from '../auth/interfaces/jwt-payload.interface';
 import { User } from './interfaces/user.interface';
 import { UsersService } from './users.service';
 
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

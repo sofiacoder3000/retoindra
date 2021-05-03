@@ -1,54 +1,49 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
-const swagger_1 = require("@nestjs/swagger");
-const aws_serverless_express_1 = require("aws-serverless-express");
 const core_1 = require("@nestjs/core");
-const platform_express_1 = require("@nestjs/platform-express");
 const app_module_1 = require("./app.module");
-const express = require('express');
-const binaryMimeTypes = [];
+const swagger_1 = require("@nestjs/swagger");
+const platform_express_1 = require("@nestjs/platform-express");
+const awsServerlessExpress = require("aws-serverless-express");
+const express = require("express");
 let cachedServer;
-process.on('unhandledRejection', (reason) => {
-    console.error(reason);
-});
-process.on('uncaughtException', (reason) => {
-    console.error(reason);
-});
 function setupSwagger(app) {
     const options = new swagger_1.DocumentBuilder()
-        .setTitle('Challenge INDRA SLS')
-        .setDescription('By Jakeline Sofia Campos Cabello')
-        .setVersion('1.0.0')
-        .addTag('Tag 01')
+        .setTitle('Nest Example')
+        .setDescription('Some api examples ')
+        .setVersion('1.0')
+        .addBearerAuth()
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, options);
-    swagger_1.SwaggerModule.setup('api', app, document);
+    swagger_1.SwaggerModule.setup('docs', app, document);
 }
-async function bootstrapServer() {
-    if (!cachedServer) {
-        try {
-            const expressApp = express();
-            const nestApp = await core_1.NestFactory.create(app_module_1.AppModule, new platform_express_1.ExpressAdapter(expressApp));
-            setupSwagger(nestApp);
-            await nestApp.init();
-            cachedServer = aws_serverless_express_1.createServer(expressApp, undefined, binaryMimeTypes);
-        }
-        catch (error) {
-            return Promise.reject(error);
-        }
-    }
-    return cachedServer;
-}
+const bootstrapServer = async () => {
+    const expressApp = express();
+    const adapter = new platform_express_1.ExpressAdapter(expressApp);
+    const app = await core_1.NestFactory.create(app_module_1.AppModule, adapter);
+    setupSwagger(app);
+    app.enableCors();
+    await app.init();
+    return awsServerlessExpress.createServer(expressApp);
+};
 const handler = async (event, context) => {
-    if (event.path === '/api') {
-        event.path = '/api/';
+    if (event.path === '/docs') {
+        event.path = '/docs/';
     }
     event.path = event.path.includes('swagger-ui')
-        ? `/api${event.path}`
+        ? `/docs${event.path}`
         : event.path;
-    cachedServer = await bootstrapServer();
-    return aws_serverless_express_1.proxy(cachedServer, event, context, 'PROMISE').promise;
+    if (!cachedServer) {
+        const server = await bootstrapServer();
+        cachedServer = server;
+        return awsServerlessExpress.proxy(server, event, context, 'PROMISE')
+            .promise;
+    }
+    else {
+        return awsServerlessExpress.proxy(cachedServer, event, context, 'PROMISE')
+            .promise;
+    }
 };
 exports.handler = handler;
 //# sourceMappingURL=lambda.js.map
