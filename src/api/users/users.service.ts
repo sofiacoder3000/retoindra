@@ -74,6 +74,7 @@ export class UsersService {
   }
 
   async findOne(user: User): Promise<User> {
+    console.log(user);
     return await this.userRepository.findOne(user);
   }
 
